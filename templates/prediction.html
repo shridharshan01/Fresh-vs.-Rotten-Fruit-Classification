@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Details</h1>
+        <div class="prediction-details">
+            <img src="{{ url_for('static', filename='uploads/' + prediction.filename)}}" alt="Prediction Image">
+            <p><strong>Filename:</strong> {{ prediction.filename }}</p>
+            <p><strong>Prediction:</strong> {{ prediction.prediction }}</p>
+            <p><strong>Confidence:</strong> {{ prediction.confidence }}%</p>
+        </div>
+        <p><a href="{{ url_for('home') }}">Go back to Home</a></p>
+    </div>
+</body>
+</html>

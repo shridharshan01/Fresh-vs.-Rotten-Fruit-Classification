@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Fruit Classification</title>
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Drag-and-Drop Upload Area */
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: #ff9a9e;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .upload-area.dragover {
+            border-color: #ff9a9e;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .upload-area p {
+            margin: 0;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .upload-area i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .upload-area img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            color: white;
+            background: linear-gradient(135deg, #ff6f61, #ffcc00);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #ffcc00, #ff6f61);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 111, 97, 0.5);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.3);
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        p a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sign Out Button */
+        .sign-out-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px; /* Adjusted padding */
+            font-size: 0.9rem; /* Adjusted font size */
+            color: white;
+            background: linear-gradient(135deg, #ff6f61, #ffcc00);
+            border: none;
+            border-radius: 20px; /* Adjusted border radius */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px; /* Adjusted gap */
+            width: auto; /* Auto width to fit content */
+        }
+
+        .sign-out-button:hover {
+            background: linear-gradient(135deg, #ffcc00, #ff6f61);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 111, 97, 0.5);
+        }
+
+        .sign-out-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.3);
+        }
+
+        /* Fruity Chatbot Button */
+        .fruity-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 8px 16px; /* Adjusted padding */
+            font-size: 0.9rem; /* Adjusted font size */
+            color: white;
+            background: linear-gradient(135deg, #ff6f61, #ffcc00);
+            border: none;
+            border-radius: 20px; /* Adjusted border radius */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px; /* Adjusted gap */
+            width: auto; /* Auto width to fit content */
+        }
+
+        .fruity-button:hover {
+            background: linear-gradient(135deg, #ffcc00, #ff6f61);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 111, 97, 0.5);
+        }
+
+        .fruity-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.3);
+        }
+
+        /* Flash Messages */
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash-messages .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .flash-messages .success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .flash-messages .error {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        /* Chatbot Container */
+        .chatbot-container {
+            position: fixed;
+            top: 80px; /* Adjusted position */
+            left: 20px; /* Adjusted position */
+            width: 350px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .chatbot-header {
+            padding: 15px;
+            background: linear-gradient(135deg, #ff6f61, #ffcc00);
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .chatbot-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            outline: none;
+        }
+
+        .chatbot-input button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #ff6f61, #ffcc00);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sign Out Button -->
+    <button class="sign-out-button" onclick="signOut()"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+
+    <!-- Fruity Chatbot Button -->
+    <button class="fruity-button" onclick="toggleChatbot()"><i class="fas fa-robot"></i> Try Fruity</button>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h1>Upload an Image</h1>
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <form method="POST" enctype="multipart/form-data" id="uploadForm">
+            <div class="form-group">
+                <label for="file"><i class="fas fa-image"></i> Select Image:</label>
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & Drop or Click to Upload</p>
+                    <img id="previewImage" src="#" alt="Preview" style="display: none;">
+                </div>
+                <input type="file" id="file" name="file" accept="image/*" required style="display: none;">
+            </div>
+            <button type="submit"><i class="fas fa-upload"></i> Upload & Predict</button>
+        </form>
+        <p><a href="{{ url_for('history') }}">View Prediction History</a></p>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3>Fruity Chatbot</h3>
+            <button onclick="toggleChatbot()">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Ask about the project..." onkeypress="handleChatbotKeyPress(event)">
+            <button onclick="sendChatbotMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // Drag-and-Drop Functionality
+        const uploadArea = document.getElementById("uploadArea");
+        const fileInput = document.getElementById("file");
+        const previewImage = document.getElementById("previewImage");
+
+        uploadArea.addEventListener("click", () => fileInput.click());
+
+        fileInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block";
+                    uploadArea.querySelector("p").style.display = "none";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        uploadArea.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            uploadArea.classList.add("dragover");
+        });
+
+        uploadArea.addEventListener("dragleave", () => {
+            uploadArea.classList.remove("dragover");
+        });
+
+        uploadArea.addEventListener("drop", (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove("dragover");
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                fileInput.files = e.dataTransfer.files;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block";
+                    uploadArea.querySelector("p").style.display = "none";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Function to handle sign-out
+        function signOut() {
+            fetch("/logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = "/"; // Redirect to landing page
+                } else {
+                    alert("Failed to sign out. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error signing out:", error);
+                alert("An error occurred while signing out.");
+            });
+        }
+
+        // Function to toggle chatbot visibility
+        function toggleChatbot() {
+            const chatbotContainer = document.getElementById("chatbotContainer");
+            chatbotContainer.style.display = chatbotContainer.style.display === "none" ? "block" : "none";
+        }
+
+        // Function to handle chatbot key press
+        function handleChatbotKeyPress(event) {
+            if (event.key === "Enter") {
+                sendChatbotMessage();
+            }
+        }
+
+        // Function to send chatbot message
+        async function sendChatbotMessage() {
+            const userInput = document.getElementById("chatbotInput").value;
+            if (userInput.trim() === "") return;
+
+            const chatbotMessages = document.getElementById("chatbotMessages");
+            chatbotMessages.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+            document.getElementById("chatbotInput").value = "";
+
+            const response = await fetch("/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ message: userInput }),
+            });
+
+            const data = await response.json();
+            chatbotMessages.innerHTML += `<p><strong>Fruity:</strong> ${data.response}</p>`;
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+    </script>
+</body>
+</html>

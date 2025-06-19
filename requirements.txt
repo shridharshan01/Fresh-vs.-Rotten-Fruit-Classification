@@ -1,0 +1,7 @@
+flask
+tensorflow
+keras
+pillow
+openai
+python-dotenv
+flask_sqlalchemy

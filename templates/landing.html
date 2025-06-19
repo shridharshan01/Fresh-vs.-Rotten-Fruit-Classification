@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh and Rotten Fruits Classification</title>
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .buttons a {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            color: white;
+            background: linear-gradient(135deg, #ff6f61, #ffcc00);
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .buttons a:hover {
+            background: linear-gradient(135deg, #ffcc00, #ff6f61);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 111, 97, 0.5);
+        }
+
+        .buttons a:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.3);
+        }
+
+        .info {
+            text-align: left;
+            margin-top: 30px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        .info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ffcc00;
+        }
+
+        .creators {
+            margin-top: 40px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .creators span {
+            color: #ffcc00;
+            font-weight: 500;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Fresh and Rotten Fruits Classification</h1>
+    <h2>Apple and Banana</h2>
+
+    <div class="container">
+        <h2>Welcome to Fruit Classification</h2>
+        <div class="buttons">
+            <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i> Register</a>
+        </div>
+
+        <!-- Information about the project -->
+        <div class="info">
+            <h3>About the Project</h3>
+            <p>
+                This project uses a Convolutional Neural Network (CNN) to classify images of apples and bananas as either fresh or rotten.
+                The model is trained on a dataset of high-quality images, enabling it to accurately distinguish between fresh and rotten fruits.
+                The system is designed to help users quickly identify the quality of fruits, reducing food waste and ensuring better consumption habits.
+            </p>
+            <h3>How It Works</h3>
+            <p>
+                The CNN model analyzes the visual features of the fruit images, such as color, texture, and shape, to determine their freshness.
+                Users can upload an image of an apple or banana, and the system will predict whether the fruit is fresh or rotten with a confidence score.
+            </p>
+        </div>
+
+        <!-- Creators' names -->
+        <div class="creators">
+            <p>Created by: <span>K Shri Dharshan</span>, <span>RJ Hareezzvijey</span>, <span>A Ram Meyyappan</span></p>
+        </div>
+    </div>
+
+    <!-- Debugging Tips -->
+    <script>
+        // Check if the links are working
+        console.log("Login URL:", "{{ url_for('login') }}");
+        console.log("Register URL:", "{{ url_for('register') }}");
+
+        // Check for JavaScript errors in the browser console
+        window.onerror = function(message, source, lineno, colno, error) {
+            console.error("JavaScript Error:", message, "at", source, "line", lineno);
+        };
+    </script>
+</body>
+</html>
