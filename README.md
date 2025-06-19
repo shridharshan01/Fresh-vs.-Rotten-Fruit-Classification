@@ -25,3 +25,14 @@ Example classes:
 - Fresh Banana
 - Rotten Banana
 - etc.
+
+# Setup
+1. Install the required packages:
+```bash
+  pip install -r requirements.txt
+```
+2. Run the application:
+```bash
+  python app.py
+```
+
